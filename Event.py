@@ -16,16 +16,16 @@ class Event:
 
     async def register(self, username, **kargs):
         self.petrs[username] = Petrgotchi(username=username, **kargs)
-        asyncio.gather(
-            self.feed_manager(username), 
-            self.clean_manager(username), 
-            self.entertain_manager(username)
+        await asyncio.gather(
+            self.feed_manager(username),  
+            self.entertain_manager(username),
+            self.clean_manager(username)
             )
 
 
     async def feed(self, username):
         try:
-            await asyncio.sleep(10)
+            await asyncio.sleep(2)
             if self.petrs[username].hunger() > 0:
                 self.petrs[username].decrease_hunger()
                 print(self.petrs[username].hunger())
@@ -46,7 +46,7 @@ class Event:
 
     async def entertain(self, username):
         try:
-            await asyncio.sleep(10)
+            await asyncio.sleep(2)
             if self.petrs[username].entertainment() > 0:
                 self.petrs[username].decrease_entertainment()
                 print(self.petrs[username].entertainment())
@@ -68,10 +68,10 @@ class Event:
 
     async def clean(self, username):
         try:
-            await asyncio.sleep(10)
+            await asyncio.sleep(2)
             if self.petrs[username].cleanliness() > 0:
                 self.petrs[username].decrease_cleanliness()
-                print(self.petrs[username].cleanliness())
+                print(self.petrs[username].cleanliness(), end='\n\n')
                 await self.clean(username)
         except asyncio.CancelledError:
             self.petrs[username].increase_cleanliness(self.event_loop.time())
