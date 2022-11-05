@@ -29,7 +29,7 @@ class Petrgotchi:
     
 
     def __dict__(self) -> str:
-        return json.dumps({"ip": self.ip, "username": self.username, "mood": self.mood, "petr_sprite": self.petr_sprite, "hunger_value": self.hunger_value, "clean_value": self.clean_value, "entertainment_value": self.entertainment_value})
+        return json.dumps({"ip": self.ip, "username": self.username, "mood": self.mood, "petr_sprite": self.petr_sprite, "hunger_value": self.hunger_value, "clean_value": self.clean_value, "entertainment_value": self.entertainment_value}, indent=4)
     
 
     def hunger(self) -> int:
