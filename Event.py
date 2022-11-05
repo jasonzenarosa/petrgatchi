@@ -32,6 +32,7 @@ class Event:
                 await self.feed(username)
         except asyncio.CancelledError:
             self.petrs[username].increase_hunger(self.event_loop.time())
+            self.tasks[username].feed = None
             await self.hunger_manager(username)
             
     async def feed_manager(self, username):
@@ -52,6 +53,7 @@ class Event:
                 await self.entertain(username)
         except asyncio.CancelledError:
             self.petrs[username].increase_entertainment(self.event_loop.time())
+            self.tasks[username].entertain = None
             await self.entertain_manager(username)
             
     async def entertain_manager(self, username):
@@ -81,6 +83,7 @@ class Event:
         else:
             await asyncio.sleep(1) 
             self.tasks[username].clean.cancel()
+            self.tasks[username].clean = None
             self.tasks[username].clean = asyncio.create_task(self.clean(username))
             
         await self.tasks[username].clean
