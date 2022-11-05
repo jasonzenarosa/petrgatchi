@@ -43,10 +43,15 @@ class Petrgotchi:
 
     
     def decrease_hunger(self) -> None:
+        # Decrease the hunger
         if self._hunger - HUNGER_DECREASE_RATE <= 0:
             self._hunger = 0
         else:
             self._hunger -= HUNGER_DECREASE_RATE
+
+        # Update the mood if necessary
+        if self._hunger == 0 and self._mood == "neutral":
+            self._mood = "dead"
     
 
     def increase_boredom(self) -> None:
@@ -57,10 +62,15 @@ class Petrgotchi:
     
 
     def decrease_boredom(self) -> None:
+        # Decrease the boredom
         if self._boredom - BOREDOM_DECREASE_RATE <= 0:
             self._boredom = 0
         else:
             self._boredom -= BOREDOM_DECREASE_RATE
+        
+        # Update the mood if necessary
+        if self._boredom == 0 and self._mood == "neutral":
+            self._mood = "sad"
     
 
     def increase_cleanliness(self) -> None:
@@ -71,7 +81,12 @@ class Petrgotchi:
 
     
     def decrease_cleanliness(self) -> None:
+        # Decrease the cleanliness
         if self._cleanliness - CLEANLINESS_DECREASE_RATE <= 0:
             self._cleanliness = 0
         else:
             self._cleanliness -= CLEANLINESS_DECREASE_RATE
+        
+        # Update the mood if necessary
+        if self._cleanliness == 0 and self._mood == "neutral":
+            self._mood = "stinky"
