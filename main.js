@@ -1,14 +1,14 @@
 import { particle } from "./petr.js"
 
-function checkIfUserExists() {
-    http = new XMLHttpRequest;
-    const url = "FILL THIS IN WITH THE REAL URL"
-    http.open("GET", url)
-    http.send()
-    console.log(http.responseText)
-}
+// function checkIfUserExists() {
+//     http = new XMLHttpRequest;
+//     const url = "FILL THIS IN WITH THE REAL URL"
+//     http.open("GET", url)
+//     http.send()
+//     console.log(http.responseText)
+// }
 
-checkIfUserExists()
+// checkIfUserExists()
 
 const SCREEN_HEIGHT = window.innerHeight;
 const SCREEN_WIDTH = window.innerWidth;
@@ -24,7 +24,7 @@ function positionElement(el, x, y) {
 
 const petr = document.querySelector('.petr');
 
-function updatePetr() {
+function updatePetrPosition() {
     // console.log(petrParticle.get_angle(), petrParticle.get_speed())
     petrParticle.move();
     let chance = Math.floor(Math.random() * 100)
@@ -34,10 +34,20 @@ function updatePetr() {
     positionElement(petr, x, y);
 }
 
-setInterval(updatePetr, 5)
+setInterval(updatePetrPosition, 5)
 
 const imagePaths = {
     "normal_petr": "./images/petr.png"
+}
+
+let example = {
+    "ip": "0.0.0.0",
+    "username": "peteranteater",
+    "mood": "happy",
+    "petr_sprite": "normal_petr",
+    "hunger_value": 100,
+    "clean_level": 100,
+    "boredom_level": 100
 }
 
 function loadPetr(petr) {

@@ -1,5 +1,5 @@
 function checkIfUserExists1() {
-    http = new XMLHttpRequest;
+    const http = new XMLHttpRequest;
     const url = "FILL THIS IN WITH THE REAL URL"
     http.open("GET", url)
     http.responseType = 'json'
@@ -19,5 +19,16 @@ function checkIfUserExists2() {
     }
 }
 
-checkIfUserExists1()
-checkIfUserExists2()
+function getUserState(username) {
+    const http = new XMLHttpRequest;
+    const url = "FILL THIS IN WITH THE REAL URL"
+
+    let json = JSON.stringify({
+        "username": username
+    })
+
+    http.open("POST", url)
+    http.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    http.send(json);
+    http.onload = () => alert(http.response);
+}
