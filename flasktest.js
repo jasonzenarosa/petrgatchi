@@ -1,7 +1,7 @@
 document.getElementById("btn").addEventListener('click', add);
 function add()
 {
-    const url = "0.0.0.0:8000/test";
+    const url = "0.0.0.0:8000/";
     const http = new XMLHttpRequest();
     http.open("GET", url);
     http.send();

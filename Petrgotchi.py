@@ -15,10 +15,9 @@ CLEANLINESS_DECREASE_RATE = 2
 
 class Petrgotchi:
     def __init__(self, **kwargs):
-        self._ip = kwargs["ip"]
         self._username = kwargs["username"]
-        self._mood = "neutral"
         self._petr_sprite = kwargs["sprite"]
+        self._mood = "neutral"
         self._hunger_value = MAX
         self._clean_value = MAX
         self._entertainment_value = MAX
@@ -29,7 +28,7 @@ class Petrgotchi:
     
 
     def __dict__(self) -> str:
-        return json.dumps({"ip": self._ip, "username": self._username, "mood": self._mood, "petr_sprite": self._petr_sprite, "hunger_value": self._hunger_value, "clean_value": self._clean_value, "entertainment_value": self._entertainment_value, "last_feed": self._last_feed_time, "last_clean": self._last_clean_time, "last_entertainment": self._last_entertainment_time}, indent=4)
+        return json.dumps({"username": self._username, "mood": self._mood, "petr_sprite": self._petr_sprite, "hunger_value": self._hunger_value, "clean_value": self._clean_value, "entertainment_value": self._entertainment_value, "last_feed": self._last_feed_time, "last_clean": self._last_clean_time, "last_entertainment": self._last_entertainment_time}, indent=4)
     
 
     def hunger(self) -> int:
