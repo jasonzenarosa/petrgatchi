@@ -69,8 +69,8 @@ class Petrgotchi:
                 self._mood = "sad"
             elif self._clean_value == 0:
                 self._mood = "stinky"
-        else:
-            self._mood = "neutral"
+            else:
+                self._mood = "neutral"
         
         # Update last feed time
         self._last_feed_time = time
@@ -101,8 +101,8 @@ class Petrgotchi:
                 self._mood = "dead"
             elif self._clean_value == 0:
                 self._mood = "stinky"
-        else:
-            self._mood = "neutral"
+            else:
+                self._mood = "neutral"
         
         # Update last entertainment time
         self._last_entertainment_time = time
@@ -133,8 +133,8 @@ class Petrgotchi:
                 self._mood = "dead"
             elif self._entertainment_value == 0:
                 self._mood = "sad"
-        else:
-            self._mood = "neutral"
+            else:
+                self._mood = "neutral"
         
         # Update last clean time
         self._last_clean_time = time
