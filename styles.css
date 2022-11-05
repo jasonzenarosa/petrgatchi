@@ -10,7 +10,7 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -22,4 +22,9 @@ body {
 
 img {
     height: 200px;
+}
+
+.button {
+    height: 50px;
+    margin: 50px;
 }
