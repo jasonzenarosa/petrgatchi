@@ -75,11 +75,11 @@ export class particle {
             // this.change_location(2*(mw-right_x), 0);
         }
         
-        if (bottom_y < 300) {
+        if (bottom_y < 350) {
             this.bounce(0);
             // this.change_location(0, -2*top_y);
 
-        } else if (top_y > mh-300) {
+        } else if (top_y > mh-350) {
             this.bounce(0);
             // this.change_location(0, 2*(mh-bottom_y));
         }
