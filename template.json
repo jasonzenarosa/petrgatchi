@@ -1,9 +1,0 @@
-{
-    "ip": 0,
-    "username": "str",
-    "Mood": "str",
-    "petr_sprite": "sprite name",
-    "hunger_value": 0,
-    "clean_level": 0,
-    "boredom_level": 0
-}

@@ -15,15 +15,11 @@ body {
 }
 
 .petr-container {
-    width: 400px;
-    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.petr {
-    width: 10px;
-    height: 10px;
-    background-color: red;
+img {
+    height: 200px;
 }
