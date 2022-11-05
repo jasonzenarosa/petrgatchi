@@ -14,26 +14,72 @@ class Event:
         self.petrs = dict()
         self.tasks = defaultdict(Tasks) #[hunger, play, clean]
 
-    async def register(self, "username"):
-        self.petrs["username"] = Petrgotchi(**kargs)
-        # use asyncio.gather(feed(), shower(), play())
-        
+    async def register(self, username, **kargs):
+        self.petrs[username] = Petrgotchi(**kargs)
+        asyncio.gather(
+            self.feed(username), self.clean(username), self.play(username))
 
-    async def feed(self, "username"):
+
+    async def feed(self, username):
         try:
             await asyncio.sleep("time")
-            if self.petrs["username"].hunger() > 0:
-                self.petrs["username"].decrease_hunger()
+            if self.petrs[username].hunger() > 0:
+                self.petrs[username].decrease_hunger()
 
         except asyncio.CancelledError:
-            self.petrs["username"].increase_hunger(self.event_loop.time())
+            self.petrs[username].increase_hunger(self.event_loop.time())
 
         finally:
-            await self.create_hunger("username")
+            await self.create_hunger(username)
             
-    async def create_hunger(self, "username"):
-        self.tasks["username"].hunger = asyncio.create_task(self.feed())
+
+    async def create_hunger(self, username):
+        self.tasks[username].hunger = asyncio.create_task(self.feed())
 
         await asyncio.sleep(1)
 
-        await self.tasks["username"].hunger
+        await self.tasks[username].hunger
+
+
+    async def entertain(self, username):
+        try:
+            await asyncio.sleep("time")
+            if self.petrs[username].entertainment() > 0:
+                self.petrs[username].decrease_entertainment()
+
+        except asyncio.CancelledError:
+            self.petrs[username].increase_entertainment(self.event_loop.time())
+
+        finally:
+            await self.create_entertainment(username)
+            
+    async def create_entertain(self, username):
+        self.tasks[username].hunger = asyncio.create_task(self.entertain())
+
+        await asyncio.sleep(1)
+
+        await self.tasks[username].entertain
+
+
+    async def clean(self, username):
+        try:
+            await asyncio.sleep("time")
+            if self.petrs[username].cleanliness() > 0:
+                self.petrs[username].decrease_cleanliness()
+
+        except asyncio.CancelledError:
+            self.petrs[username].increase_cleanliness(self.event_loop.time())
+
+        finally:
+            await self.create_clean(username)
+            
+    async def create_clean(self, username):
+        self.tasks[username].clean = asyncio.create_task(self.clean())
+
+        await asyncio.sleep(1)
+
+        await self.tasks[username].clean
+
+    
+
+    
