@@ -15,10 +15,10 @@ CLEANLINESS_DECREASE_RATE = 2
 
 class Petrgotchi:
     def __init__(self, **kwargs):
-        self.ip = kargs["ip"]
-        self.username = kargs["username"]
+        self.ip = kwargs["ip"]
+        self.username = kwargs["username"]
         self.mood = "neutral"
-        self.petr_sprite = kargs["sprite"]
+        self.petr_sprite = kwargs["sprite"]
         self.hunger_value = MAX
         self.clean_value = MAX
         self.entertainment_value = MAX
