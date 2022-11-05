@@ -16,8 +16,9 @@ async def register():
     await event.register(username=jso["username"], ip=request.remote_addr, petr_sprite=jso["petr_sprite"])
 
 @app.route("/Petrgotchi")
-async def button_push(button, username):
-    await exec(f"event.{button}({username})")
+async def button_push():
+    button = request.json.load()["button"]
+    await exec(f"event.{button}({request.remote_addr})")
 
 @app.route("/check")
 async def on_load():
