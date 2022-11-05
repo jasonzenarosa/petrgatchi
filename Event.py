@@ -4,9 +4,9 @@ from Petrgotchi import Petrgotchi
 
 class Tasks:
     def __init__(self):
-        self.hunger = None
+        self.feed = None
         self.clean = None
-        self.bored = None
+        self.entertain = None
 
 class Event:
     def __init__(self):
@@ -15,71 +15,78 @@ class Event:
         self.tasks = defaultdict(Tasks) #[hunger, play, clean]
 
     async def register(self, username, **kargs):
-        self.petrs[username] = Petrgotchi(**kargs)
+        self.petrs[username] = Petrgotchi(username=username, **kargs)
         asyncio.gather(
-            self.feed(username), self.clean(username), self.play(username))
+            self.feed_manager(username), 
+            self.clean_manager(username), 
+            self.entertain_manager(username)
+            )
 
 
     async def feed(self, username):
         try:
-            await asyncio.sleep("time")
+            await asyncio.sleep(10)
             if self.petrs[username].hunger() > 0:
                 self.petrs[username].decrease_hunger()
-
+                await self.hunger(username)
+                print(self.petrs[username].hunger())
         except asyncio.CancelledError:
             self.petrs[username].increase_hunger(self.event_loop.time())
-
-        finally:
-            await self.create_hunger(username)
+            await self.hunger_manager(username)
             
-
-    async def create_hunger(self, username):
-        self.tasks[username].hunger = asyncio.create_task(self.feed())
-
-        await asyncio.sleep(1)
-
-        await self.tasks[username].hunger
-
+    async def feed_manager(self, username):
+        if self.tasks[username].feed is None:
+            self.tasks[username].feed = asyncio.create_task(self.feed(username))
+        else:
+            self.tasks[username].feed.cancel()
+            self.tasks[username].feed = asyncio.create_task(self.feed(username))
 
     async def entertain(self, username):
         try:
-            await asyncio.sleep("time")
+            await asyncio.sleep(10)
             if self.petrs[username].entertainment() > 0:
                 self.petrs[username].decrease_entertainment()
-
+                await self.entertain(username)
+                print(self.petrs[username].entertainment())
         except asyncio.CancelledError:
             self.petrs[username].increase_entertainment(self.event_loop.time())
-
-        finally:
-            await self.create_entertainment(username)
+            await self.entertain_manager(username)
             
-    async def create_entertain(self, username):
-        self.tasks[username].hunger = asyncio.create_task(self.entertain())
-
-        await asyncio.sleep(1)
-
-        await self.tasks[username].entertain
+    async def entertain_manager(self, username):
+        if self.tasks[username].entertain is None:
+            self.tasks[username].entertain = asyncio.create_task(self.entertain(username))
+        else:
+            self.tasks[username].entertain.cancel()
+            self.tasks[username].entertain = asyncio.create_task(self.entertain(username))
 
 
     async def clean(self, username):
         try:
-            await asyncio.sleep("time")
+            await asyncio.sleep(10)
             if self.petrs[username].cleanliness() > 0:
                 self.petrs[username].decrease_cleanliness()
-
+                await self.clean(username)
+                print(self.petrs[username].cleanliness())
         except asyncio.CancelledError:
             self.petrs[username].increase_cleanliness(self.event_loop.time())
-
-        finally:
-            await self.create_clean(username)
+            await self.clean_manager(username)
             
-    async def create_clean(self, username):
-        self.tasks[username].clean = asyncio.create_task(self.clean())
-
+    async def clean_manager(self, username):
+        if self.tasks[username].clean is None:
+            self.tasks[username].clean = asyncio.create_task(self.clean(username))
+        else:
+            self.tasks[username].clean.cancel()
+            self.tasks[username].clean = asyncio.create_task(self.clean(username))
+            
         await asyncio.sleep(1)
 
         await self.tasks[username].clean
 
     
+
+    
+if __name__ == "__main__":
+    event = Event()
+    asyncio.run(event.register(username="169.234.33.95", ip="n", sprite="image"))
 
     
