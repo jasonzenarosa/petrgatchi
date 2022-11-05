@@ -1,3 +1,6 @@
+import json
+
+
 MAX = 10000
 
 HUNGER_INCREASE_RATE = 50
@@ -12,43 +15,47 @@ CLEANLINESS_DECREASE_RATE = 2
 
 class Petrgotchi:
     def __init__(self, **kargs):
-        self._hunger = MAX
-        self._entertainment = MAX
-        self._cleanliness = MAX
-
-        self._mood = "neutral"
-
-        self._sprite = kargs["sprite"]
+        self.ip = kargs["ip"]
+        self.username = kargs["username"]
+        self.mood = "neutral"
+        self.petr_sprite = kargs["sprite"]
+        self.hunger_value = MAX
+        self.clean_value = MAX
+        self.entertainment_value = MAX
     
 
     def hunger(self) -> int:
-        return self._hunger
+        return self.hunger_value
     
 
     def entertainment(self) -> int:
-        return self._entertainment
+        return self.entertainment_value
     
 
     def cleanliness(self) -> int:
-        return self._cleanliness
+        return self.clean_value
 
     
     def mood(self) -> str:
         return self._mood
+
+    
+    def __dict__(self) -> str:
+        return json.dumps({"ip": self.ip, "username": self.username, "mood": self.mood, "petr_sprite": self.petr_sprite, "hunger_value": self.hunger_value, "clean_value": self.clean_value, "entertainment_value": self.entertainment_value})
     
 
     def increase_hunger(self) -> None:
         # Increase the hunger
-        if self._hunger > MAX - HUNGER_INCREASE_RATE:
-            self._hunger = MAX
+        if self.hunger_value > MAX - HUNGER_INCREASE_RATE:
+            self.hunger_value = MAX
         else:
-            self._hunger += HUNGER_INCREASE_RATE
+            self.hunger_value += HUNGER_INCREASE_RATE
         
         # Update the mood if necessary
         if self._mood != "neutral":
-            if self._entertainment == 0:
+            if self.entertainment_value == 0:
                 self._mood = "sad"
-            elif self._cleanliness == 0:
+            elif self.clean_value == 0:
                 self._mood = "stinky"
         else:
             self._mood = "neutral"
@@ -56,28 +63,28 @@ class Petrgotchi:
     
     def decrease_hunger(self) -> None:
         # Decrease the hunger
-        if self._hunger - HUNGER_DECREASE_RATE <= 0:
-            self._hunger = 0
+        if self.hunger_value - HUNGER_DECREASE_RATE <= 0:
+            self.hunger_value = 0
         else:
-            self._hunger -= HUNGER_DECREASE_RATE
+            self.hunger_value -= HUNGER_DECREASE_RATE
 
         # Update the mood if necessary
-        if self._hunger == 0 and self._mood == "neutral":
+        if self.hunger_value == 0 and self._mood == "neutral":
             self._mood = "dead"
     
 
     def increase_entertainment(self) -> None:
         # Increase the entertainment
-        if self._entertainment > MAX - ENTERTAINMENT_INCREASE_RATE:
-            self._entertainment = MAX
+        if self.entertainment_value > MAX - ENTERTAINMENT_INCREASE_RATE:
+            self.entertainment_value = MAX
         else:
-            self._entertainment += ENTERTAINMENT_INCREASE_RATE
+            self.entertainment_value += ENTERTAINMENT_INCREASE_RATE
         
         # Update the mood if necessary
         if self._mood != "neutral":
-            if self._hunger == 0:
+            if self.hunger_value == 0:
                 self._mood = "dead"
-            elif self._cleanliness == 0:
+            elif self.clean_value == 0:
                 self._mood = "stinky"
         else:
             self._mood = "neutral"
@@ -85,28 +92,28 @@ class Petrgotchi:
 
     def decrease_entertainment(self) -> None:
         # Decrease the entertainment
-        if self._entertainment - ENTERTAINMENT_DECREASE_RATE <= 0:
-            self._entertainment = 0
+        if self.entertainment_value - ENTERTAINMENT_DECREASE_RATE <= 0:
+            self.entertainment_value = 0
         else:
-            self._entertainment -= ENTERTAINMENT_DECREASE_RATE
+            self.entertainment_value -= ENTERTAINMENT_DECREASE_RATE
         
         # Update the mood if necessary
-        if self._entertainment == 0 and self._mood == "neutral":
+        if self.entertainment_value == 0 and self._mood == "neutral":
             self._mood = "sad"
     
 
     def increase_cleanliness(self) -> None:
         # Increase the cleanliness
-        if self._cleanliness > MAX - CLEANLINESS_INCREASE_RATE:
-            self._cleanliness = MAX
+        if self.clean_value > MAX - CLEANLINESS_INCREASE_RATE:
+            self.clean_value = MAX
         else:
-            self._cleanliness += CLEANLINESS_INCREASE_RATE
+            self.clean_value += CLEANLINESS_INCREASE_RATE
         
         # Update the mood if necessary
         if self._mood != "neutral":
-            if self._hunger == 0:
+            if self.hunger_value == 0:
                 self._mood = "dead"
-            elif self._entertainment == 0:
+            elif self.entertainment_value == 0:
                 self._mood = "sad"
         else:
             self._mood = "neutral"
@@ -114,11 +121,11 @@ class Petrgotchi:
     
     def decrease_cleanliness(self) -> None:
         # Decrease the cleanliness
-        if self._cleanliness - CLEANLINESS_DECREASE_RATE <= 0:
-            self._cleanliness = 0
+        if self.clean_value - CLEANLINESS_DECREASE_RATE <= 0:
+            self.clean_value = 0
         else:
-            self._cleanliness -= CLEANLINESS_DECREASE_RATE
+            self.clean_value -= CLEANLINESS_DECREASE_RATE
         
         # Update the mood if necessary
-        if self._cleanliness == 0 and self._mood == "neutral":
+        if self.clean_value == 0 and self._mood == "neutral":
             self._mood = "stinky"
