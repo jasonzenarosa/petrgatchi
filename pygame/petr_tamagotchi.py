@@ -31,7 +31,11 @@ class PetrTamagotchi:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self._running = False
-                
+
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if width/2 <= mouse[0] <= width/2+140 and height/2 <= mouse[1] <= height/2+40:
+                            pass
+
                 self._redraw()
         finally:
             pygame.quit()
