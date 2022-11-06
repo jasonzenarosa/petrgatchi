@@ -1,14 +1,40 @@
 import { particle } from "./petr.js"
 
-// function checkIfUserExists() {
-//     http = new XMLHttpRequest;
-//     const url = "FILL THIS IN WITH THE REAL URL"
-//     http.open("GET", url)
-//     http.send()
-//     console.log(http.responseText)
-// }
+function checkIfUserExists() {
+    let http = new XMLHttpRequest;
+    const url = "http://127.0.0.1:8000/check"
+    http.open("GET", url, false)
+    http.send( null )
+    return http.responseText
+}
 
-// checkIfUserExists()
+function newUser (username) {
+    let userdata = {"username": username}
+    let xhr = new XMLHttpRequest;
+    const url = "http://127.0.0.1:8000/register"
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(userdata))
+    return xhr.responseText
+}
+
+let r = checkIfUserExists()
+if (r === '0') {
+    let username = prompt('Enter a username')
+    console.log(newUser(username))
+    // fetch('http://127.0.0.1:8000/register', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(userdata)
+    // })
+    // .then(response => response.json())
+    // .then(response => console.log(JSON.stringify(response)))
+}
+
+
 
 const SCREEN_HEIGHT = window.innerHeight;
 const SCREEN_WIDTH = window.innerWidth;
