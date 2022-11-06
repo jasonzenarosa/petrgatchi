@@ -41,6 +41,7 @@ class PetrTamagotchi:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self._running = False
+<<<<<<< HEAD
                     elif event.type == pygame.MOUSEBUTTONDOWN:
                         mouse = pygame.mouse.get_pos()
                         
@@ -68,6 +69,13 @@ class PetrTamagotchi:
                 else:
                     self._petr = pygame.image.load('image_petr.png')
                 
+=======
+
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if width/2 <= mouse[0] <= width/2+140 and height/2 <= mouse[1] <= height/2+40:
+                            pass
+
+>>>>>>> 73c5008b88aee3338510d42adf0a65dfa6a0eb8f
                 self._redraw()
         finally:
             pygame.quit()
