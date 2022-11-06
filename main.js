@@ -64,6 +64,28 @@ function loadPetr(petr) {
     // load mood
 }
 
+let food = document.querySelector('.feed')
+let _play = document.querySelector('.play')
+let _shower = document.querySelector('.shower')
+
+function feed() {
+    let btn = document.createElement("button");
+    btn.innerHTML = food;
+    document.body.appendChild(btn);
+}
+
+function play() {
+    let btn = document.createElement("button");
+    btn.innerHTML = _play;
+    document.body.appendChild(btn);
+}
+
+function shower() {
+    let btn = document.createElement("button");
+    btn.innerHTML = _shower;
+    document.body.appendChild(btn);
+}
+
 loadPetr(example)
 
 
