@@ -16,10 +16,10 @@ async def register():
     jso = request.json #mimetype must be application/json
     await event.register(username=jso["username"], ip=request.remote_addr, sprite='normal_petr')
 
-@app.route("/Petrgotchi")
+@app.route("/Petrgotchi", methods=['POST'])
 async def button_push():
-    button = request.json.load()["button"]
-    await exec(f"event.{button}({request.remote_addr})")
+    button = request.json["button"]
+    await exec(f"event.{button}('169.234.33.95')")
 
 @app.route("/check")
 async def on_load():

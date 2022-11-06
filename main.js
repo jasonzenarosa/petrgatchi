@@ -1,27 +1,27 @@
 import { particle } from "./petr.js"
 
-function checkIfUserExists() {
-    let http = new XMLHttpRequest;
-    const url = "http://127.0.0.1:8000/check"
-    http.open("GET", url, false)
-    http.send( null )
-    return http.responseText
-}
+// function checkIfUserExists() {
+//     let http = new XMLHttpRequest;
+//     const url = "http://127.0.0.1:8000/check"
+//     http.open("GET", url, false)
+//     http.send( null )
+//     return http.responseText
+// }
 
-function newUser (username) {
-    let userdata = {"username": username}
-    let xhr = new XMLHttpRequest;
-    const url = "http://127.0.0.1:8000/register"
-    xhr.open("POST", url, false);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(userdata))
-    return xhr.responseText
-}
+// function newUser (username) {
+//     let userdata = {"username": username}
+//     let xhr = new XMLHttpRequest;
+//     const url = "http://127.0.0.1:8000/register"
+//     xhr.open("POST", url, false);
+//     xhr.setRequestHeader("Content-Type", "application/json");
+//     xhr.send(JSON.stringify(userdata))
+//     return xhr.responseText
+// }
 
-let r = checkIfUserExists()
-if (r === '0') {
-    let username = prompt('Enter a username')
-    console.log(newUser(username))
+// let r = checkIfUserExists()
+// if (r === '0') {
+//     let username = prompt('Enter a username')
+//     console.log(newUser(username))
     // fetch('http://127.0.0.1:8000/register', {
     //     method: 'POST',
     //     headers: {
@@ -32,7 +32,7 @@ if (r === '0') {
     // })
     // .then(response => response.json())
     // .then(response => console.log(JSON.stringify(response)))
-}
+// }
 
 
 
@@ -90,27 +90,37 @@ function loadPetr(petr) {
     // load mood
 }
 
-let food = document.querySelector('.feed')
+let _food = document.querySelector('.feed')
 let _play = document.querySelector('.play')
 let _shower = document.querySelector('.shower')
 
-function feed() {
-    let btn = document.createElement("button");
-    btn.innerHTML = food;
-    document.body.appendChild(btn);
-}
+_food.addEventListener('click', _ => {
+    let xhr = new XMLHttpRequest
+    let userdata = {"button": "feed"}
+    let url = "http://127.0.0.1:8000/Petrgotchi"
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(userdata))
+    return xhr.responseText
+})
 
-function play() {
-    let btn = document.createElement("button");
-    btn.innerHTML = _play;
-    document.body.appendChild(btn);
-}
+// function feed() {
+//     let btn = document.createElement("button");
+//     btn.innerHTML = _food;
+//     document.body.appendChild(btn);
+// }
 
-function shower() {
-    let btn = document.createElement("button");
-    btn.innerHTML = _shower;
-    document.body.appendChild(btn);
-}
+// function play() {
+//     let btn = document.createElement("button");
+//     btn.innerHTML = _play;
+//     document.body.appendChild(btn);
+// }
+
+// function shower() {
+//     let btn = document.createElement("button");
+//     btn.innerHTML = _shower;
+//     document.body.appendChild(btn);
+// }
 
 loadPetr(example)
 
