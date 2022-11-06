@@ -4,11 +4,7 @@ from Event import Event
 import asyncio
 
 app = Flask(__name__)
-CORS(app)
-
-@app.route("/test")
-def test():
-    return "Hello world"
+CORS(app) 
 
 @app.route("/register")
 async def register():

@@ -25,7 +25,7 @@ class Event:
 
     async def _feed(self, ip):
         try:
-            await asyncio.sleep(2)
+            await asyncio.sleep(2) # update delay for hunger
             if self._petrs[ip].hunger() > 0:
                 self._petrs[ip].decrease_hunger()
                 print(self._petrs[ip].hunger())
@@ -46,7 +46,7 @@ class Event:
 
     async def _entertain(self, ip):
         try:
-            await asyncio.sleep(2)
+            await asyncio.sleep(2) # update delay for entertainment
             if self._petrs[ip].entertainment() > 0:
                 self._petrs[ip].decrease_entertainment()
                 print(self._petrs[ip].entertainment())
@@ -68,7 +68,7 @@ class Event:
 
     async def _clean(self, ip):
         try:
-            await asyncio.sleep(2)
+            await asyncio.sleep(2) # update delay for cleanliness
             if self._petrs[ip].cleanliness() > 0:
                 self._petrs[ip].decrease_cleanliness()
                 print(self._petrs[ip].cleanliness(), end='\n\n')
