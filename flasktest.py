@@ -22,15 +22,17 @@ async def button_push():
 
 @app.route("/check")
 async def on_load():
+    print(request.remote_addr)
     if request.remote_addr in event.petrs:
         return dict(event.petrs[request.remote_addr])
-    return 0
+    return '0'
 
 @app.route("/user/<username>")
 async def get_info():
     return dict(event.petrs[request.remote_addr])
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
     event = Event()
+    app.run(host='0.0.0.0', port=8000)
+    
 
