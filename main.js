@@ -18,10 +18,10 @@ function newUser (username) {
     return xhr.responseText
 }
 
-let r = checkIfUserExists()
-if (r === '0') {
-    let username = prompt('Enter a username')
-    console.log(newUser(username))
+// let r = checkIfUserExists()
+// if (r === '0') {
+//     let username = prompt('Enter a username')
+//     console.log(newUser(username))
     // fetch('http://127.0.0.1:8000/register', {
     //     method: 'POST',
     //     headers: {
@@ -32,9 +32,31 @@ if (r === '0') {
     // })
     // .then(response => response.json())
     // .then(response => console.log(JSON.stringify(response)))
+// }
+
+//$(function() {
+    $('#feed').on('click', function(e) {
+      e.preventDefault()
+      let userdata = {"button": button}
+    let xhr = new XMLHttpRequest;
+    const url = "http://127.0.0.1:8000/Petrgotchi"
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(userdata))
+    return xhr.responseText
+    });
+  //});
+
+function on_button (button) {
+    
+    let userdata = {"button": button}
+    let xhr = new XMLHttpRequest;
+    const url = "http://127.0.0.1:8000/Petrgotchi"
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(userdata))
+    return xhr.responseText
 }
-
-
 
 const SCREEN_HEIGHT = window.innerHeight;
 const SCREEN_WIDTH = window.innerWidth;

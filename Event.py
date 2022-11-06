@@ -25,7 +25,7 @@ class Event:
 
     async def feed(self, username):
         try:
-            await asyncio.sleep(2)
+            await asyncio.sleep(20)
             if self.petrs[username].hunger() > 0:
                 self.petrs[username].decrease_hunger()
                 print(self.petrs[username].hunger())
@@ -46,7 +46,7 @@ class Event:
 
     async def entertain(self, username):
         try:
-            await asyncio.sleep(2)
+            await asyncio.sleep(20)
             if self.petrs[username].entertainment() > 0:
                 self.petrs[username].decrease_entertainment()
                 print(self.petrs[username].entertainment())
@@ -68,7 +68,7 @@ class Event:
 
     async def clean(self, username):
         try:
-            await asyncio.sleep(2)
+            await asyncio.sleep(20)
             if self.petrs[username].cleanliness() > 0:
                 self.petrs[username].decrease_cleanliness()
                 print(self.petrs[username].cleanliness(), end='\n\n')
