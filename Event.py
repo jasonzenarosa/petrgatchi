@@ -10,7 +10,6 @@ class Tasks:
 
 class Event:
     def __init__(self):
-        self.event_loop = asyncio.get_event_loop()
         self.petrs = dict()
         self.tasks = defaultdict(Tasks) #[hunger, play, clean]
 
@@ -22,7 +21,6 @@ class Event:
             self.clean_manager(username)
             )
 
-
     async def feed(self, username):
         try:
             await asyncio.sleep(20)
@@ -31,7 +29,7 @@ class Event:
                 print(self.petrs[username].hunger())
                 await self.feed(username)
         except asyncio.CancelledError:
-            self.petrs[username].increase_hunger(self.event_loop.time())
+            self.petrs[username].increase_hunger(asyncio.get_event_loop().time())
             self.tasks[username].feed = None
             await self.hunger_manager(username)
             
@@ -52,7 +50,7 @@ class Event:
                 print(self.petrs[username].entertainment())
                 await self.entertain(username)
         except asyncio.CancelledError:
-            self.petrs[username].increase_entertainment(self.event_loop.time())
+            self.petrs[username].increase_entertainment(asyncio.get_event_loop().time())
             self.tasks[username].entertain = None
             await self.entertain_manager(username)
             
@@ -74,7 +72,7 @@ class Event:
                 print(self.petrs[username].cleanliness(), end='\n\n')
                 await self.clean(username)
         except asyncio.CancelledError:
-            self.petrs[username].increase_cleanliness(self.event_loop.time())
+            self.petrs[username].increase_cleanliness(asyncio.get_event_loop().time())
             await self.clean_manager(username)
             
     async def clean_manager(self, username):

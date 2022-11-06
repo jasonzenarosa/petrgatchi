@@ -2,7 +2,7 @@ import { particle } from "./petr.js"
 
 function checkIfUserExists() {
     let http = new XMLHttpRequest;
-    const url = "http://127.0.0.1:8000/check"
+    const url = "http://127.0.0.1:5500/check"
     http.open("GET", url, false)
     http.send( null )
     return http.responseText
@@ -11,7 +11,7 @@ function checkIfUserExists() {
 function newUser (username) {
     let userdata = {"username": username}
     let xhr = new XMLHttpRequest;
-    const url = "http://127.0.0.1:8000/register"
+    const url = "http://127.0.0.1:5500/register"
     xhr.open("POST", url, false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(userdata))
@@ -51,7 +51,7 @@ function on_button (button) {
     
     let userdata = {"button": button}
     let xhr = new XMLHttpRequest;
-    const url = "http://127.0.0.1:8000/Petrgotchi"
+    const url = "http://127.0.0.1:5500/Petrgotchi"
     xhr.open("POST", url, false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(userdata))
