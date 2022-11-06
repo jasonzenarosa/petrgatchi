@@ -32,11 +32,6 @@ class PetrTamagotchi:
                     if event.type == pygame.QUIT:
                         self._running = False
                 
-                if random.random() > 0.5:
-                    self.x += self.
-                else:
-                    self.x -= 1
-                
                 self._redraw()
         finally:
             pygame.quit()
