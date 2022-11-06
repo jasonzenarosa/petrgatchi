@@ -1,8 +1,8 @@
 from aiohttp import web
 from Event import Event
+import asyncio
 
 routes = web.RouteTableDef()
-
 event = Event()
 
 @routes.get("/register")
@@ -25,12 +25,21 @@ async def on_load(request):
 async def get_info(request):
     return dict(event.petrs[request.remote_addr])
 
-app = web.Application(loop=event.event_loop)
+app = web.Application()
 app.add_routes(routes)
-web.run_app(app)
-    
 
-if __name__ == "__main__":
-    event = Event()
-    app.run(host='0.0.0.0', port=8000)
+async def main():
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner)    
+    await site.start()
+    await asyncio.Event().wait()
+
+asyncio.run(main())
+    
+    
+    
+# if __name__ == "__main__":
+#     event = Event()
+    # app.run(host='0.0.0.0', port=8000)
 

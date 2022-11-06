@@ -10,7 +10,7 @@ class Tasks:
 
 class Event:
     def __init__(self):
-        self.event_loop = asyncio.new_event_loop
+        self.event_loop = asyncio.get_event_loop()
         self.petrs = dict()
         self.tasks = defaultdict(Tasks) #[hunger, play, clean]
 
