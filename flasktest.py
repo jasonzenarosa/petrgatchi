@@ -10,10 +10,11 @@ CORS(app)
 def test():
     return "Hello world"
 
-@app.route("/register")
+@app.route("/register", methods=['POST'])
 async def register():
-    jso = request.json.load() #mimetype must be application/json
-    await event.register(username=jso["username"], ip=request.remote_addr, petr_sprite=jso["petr_sprite"])
+    print(request.json)
+    jso = request.json #mimetype must be application/json
+    await event.register(username=jso["username"], ip=request.remote_addr, sprite='normal_petr')
 
 @app.route("/Petrgotchi")
 async def button_push():

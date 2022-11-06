@@ -1,27 +1,17 @@
 function checkIfUserExists1() {
-    const http = new XMLHttpRequest;
-    const url = "FILL THIS IN WITH THE REAL URL"
+    const http = new XMLHttpRequest();
+    const url = "http://127.0.0.1:8000/check"
     http.open("GET", url)
     http.responseType = 'json'
     http.send()
-    http.onload = _ =>{
-        console.log(http.response)
-    }
-}
-
-function checkIfUserExists2() {
-    http = new XMLHttpRequest;
-    const url = "FILL THIS IN WITH THE REAL URL"
-    http.open("GET", url)
-    http.send()
-    http.onreadystatechange = _ =>{
-        console.log(http.responseText)
+    http.onload = _ => {
+        return http.response
     }
 }
 
 function getUserState(username) {
-    const http = new XMLHttpRequest;
-    const url = "FILL THIS IN WITH THE REAL URL"
+    const http = new XMLHttpRequest();
+    const url = `http://127.0.0.1:8000/user/${username}`
 
     let json = JSON.stringify({
         "username": username
@@ -30,5 +20,8 @@ function getUserState(username) {
     http.open("POST", url)
     http.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     http.send(json);
-    http.onload = () => alert(http.response);
+    http.onload = () => console.log(http.response);
 }
+
+checkIfUserExists1()
+checkIfUserExists2()
