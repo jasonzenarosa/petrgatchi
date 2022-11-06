@@ -5,7 +5,7 @@ import random
 _FRAME_RATE = 30
 _INITIAL_WIDTH = 700
 _INITIAL_HEIGHT = 700
-_BACKGROUND_COLOR = pygame.Color(175, 95, 0)
+_BACKGROUND_COLOR = pygame.Color(255, 255, 255)
 
 
 class PetrTamagotchi:
@@ -31,6 +31,11 @@ class PetrTamagotchi:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self._running = False
+                
+                if random.random() > 0.5:
+                    self.x += self.
+                else:
+                    self.x -= 1
                 
                 self._redraw()
         finally:
