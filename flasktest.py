@@ -18,17 +18,17 @@ async def register():
 @app.route("/Petrgotchi")
 async def button_push():
     button = request.json.load()["button"]
-    await exec(f"event.{button}({request.remote_addr})")
+    await exec(f"event.{button}_manager({request.remote_addr})")
 
 @app.route("/check")
 async def on_load():
-    if request.remote_addr in event.petrs:
-        return dict(event.petrs[request.remote_addr])
+    if request.remote_addr in event.get_petrs():
+        return dict(event.get_petrs()[request.remote_addr])
     return 0
 
 @app.route("/user/<username>")
 async def get_info():
-    return dict(event.petrs[request.remote_addr])
+    return dict(event.get_petrs()[request.remote_addr])
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
